@@ -1,0 +1,32 @@
+{% extends "base_template.html" %}
+
+
+{% block content %}
+  <form action="/" method="post" enctype="multipart/form-data">
+    <label for="file">Image File:</label>
+    <input type="file" id="file" name="file" accept="image/*">
+
+    <label for="caption">Caption:</label>
+    <input type="text" id="caption" name="caption">
+
+    <label for="tags1">Tag 1:</label>
+    <input type="text" id="tags1" name="tags[]">
+
+    <label for="tags2">Tag 2:</label>
+    <input type="text" id="tags2" name="tags[]">
+
+    <label for="tags3">Tag 3:</label>
+    <input type="text" id="tags3" name="tags[]">
+
+    <label for="tags4">Tag 4:</label>
+    <input type="text" id="tags4" name="tags[]">
+
+    <label for="tags5">Tag 5:</label>
+    <input type="text" id="tags5" name="tags[]">
+
+    <label></label>
+    <input type="submit" value="Upload">
+  </form>
+  <p>&nbsp;</p>
+  <p><a href="/">View Images</a></p>
+{% endblock %}

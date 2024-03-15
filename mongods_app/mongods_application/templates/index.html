@@ -1,0 +1,21 @@
+{% extends "base_template.html" %}
+
+
+{% block content %}
+  <p><a href="/add_image">Add new image</a></p>
+
+  {% for image in images %}
+    <img src="data:image/jpeg;base64,{{ image.encoded_string }}" 
+         alt="{{ image.filename }}"
+         title="{{ image.filename }}"
+         width="500"><br>
+    <strong>{{ image.metadata.caption }}</strong><br>
+    <small>{{ image.metadata.tags|join( ", " ) }}</small>
+    <br>
+  {% endfor %}
+  {# Jinja `join` filter concatenates items in a list #}
+  
+  {% if images|length > 0 %}
+    <p><a href="/add_image">Add new image</a></p>
+  {% endif %}
+{% endblock %}

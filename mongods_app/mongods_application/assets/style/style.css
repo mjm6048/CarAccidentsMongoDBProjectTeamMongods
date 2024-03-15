@@ -1,0 +1,49 @@
+body {
+  background: url( ../img/bkgd.webp ) fixed;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+img {
+  margin-top: 2em;
+  border: 1px solid white;
+}
+
+a {
+  color: black;
+}
+
+form {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 2fr;
+  max-width: 500px;
+  margin: auto;
+}
+
+label {
+  text-align: right;
+  align-self: center;
+}
+
+input,
+button {
+  width: 100%;
+  padding: .5em;
+  box-sizing: border-box;
+}
+
+input::file-selector-button {
+  padding: .5em;
+}
+
+input[type=submit],
+input::file-selector-button {
+  background-color: rgba( 255, 255, 255, .3 );
+  cursor: pointer;
+}
+
+input[type=submit]:hover,
+input::file-selector-button:hover {
+  background-color: rgba( 255, 255, 255, .6 );
+}
