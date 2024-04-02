@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  div.containersearch
+  h1.title Search
+  form(action="/search", method="get")
+    .search-wrapper
+      input#searchlist(type="text", name="query", placeholder="Search here...")
+      button(type="submit") Search
+

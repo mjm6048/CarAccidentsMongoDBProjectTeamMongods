@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div.container
+    button#backButton(type="button" onclick="window.history.back();") Back
+    div.image-section
+      h2.weather The weather was 
+      img#weatherImage(src='' alt='Weather Scene')
+      form#commentForm
+        textarea#commentBox(placeholder="Comment Here Please!!")
+        button(type="submit") Submit Comment
+    div.details-section#accidentDetails
+      if title
+        each item in title
+          h1= item.Description
+      else
+        h1 No Data Available
