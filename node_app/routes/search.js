@@ -2,8 +2,6 @@ const express = require( 'express' ),
       router = express.Router(),
       accidents = require('../models/accidents');
 
-router.get('/')
-
 // GET home page
 router.get('/', async ( req, res ) => { 
       

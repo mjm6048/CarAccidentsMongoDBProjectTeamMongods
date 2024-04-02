@@ -19,7 +19,7 @@ block content
         - }
 
         each record in searchResults
-            a(href="/accident?ref=" + record._id)
+            a(href="/accident/" + record._id)
                 h3= `${record.City}, ${record.County}, ${record.Country}`
             h5= `${record.Start_Time} - ${record.End_Time}`
             p= record.Description
