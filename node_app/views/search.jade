@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    .container
+        form(action="/search?", method="GET")
+            input(type="text", name="fragment", placeholder="search accident descriptions...", value=fragment ? fragment : "")
+            input(hidden, name="page", value=1)
+            //- button(name="page", value=page)
+            button(type="submit") Search
+        
+        - if(!isNaN(page) && fragment != "") {
+            - if(page - 1 > 0) {
+                a(href="/search?fragment=" + fragment + "&page=" + (page - 1)) Previous Page
+                span  - 
+            - }
+            - if(searchResults.length == 25) {
+                a(href="/search?fragment=" + fragment + "&page=" + (page + 1)) Next Page
+            - }
+        - }
+
+        each record in searchResults
+            a(href="/accident?ref=" + record._id)
+                h3= `${record.City}, ${record.County}, ${record.Country}`
+            h5= `${record.Start_Time} - ${record.End_Time}`
+            p= record.Description

@@ -1,5 +1,3 @@
-const { ObjectId, Decimal128 } = require('mongodb');
-
 const express = require( 'express' ),
       router = express.Router(),
       accidents = require('../models/accidents');
