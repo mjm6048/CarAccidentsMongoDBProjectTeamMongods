@@ -10,6 +10,13 @@ mongoimport --db mongoProject --collection accidents --type csv --headerline --f
 # There is very few workarounds for an empty array in csv import so we have to do it this way.
 mongosh 127.0.0.1:27017 --quiet createCommentsArray.js
 
+# Creating the geo index with a 2dsphere so the coordinates can be searchable by a range.
+# Allows us to search by area/radius given a set of coordinates
+mongosh 127.0.0.1:27017 --quiet createGeoMongoIndex.js
+
+# Test file for area search. Change the area/radius as needed to test.
+mongosh 127.0.0.1:27017 --quiet createAreaSearchTest.js
+
 # add import for images collection from dump
 mongoimport --db mongoProject --collection users --type csv --headerline --file Users.csv
 
