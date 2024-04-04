@@ -1,7 +1,7 @@
 const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
-const imagesSchema = new mongoose.Schema(
+const fsChunksSchema = new mongoose.Schema(
     {
         _id: ObjectId,
         files_id: ObjectId,
@@ -10,4 +10,4 @@ const imagesSchema = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model('images', imagesSchema);
+module.exports = mongoose.model('fs.chunks', fsChunksSchema);
