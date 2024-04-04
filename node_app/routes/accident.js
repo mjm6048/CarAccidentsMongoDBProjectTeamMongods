@@ -61,16 +61,7 @@ router.post('/comment', async (req, res) => {
     const updated = await accidents.findOneAndUpdate(
         {_id: new ObjectId(req.query.id)},
         {$push: {Comments: req.body.comment}},
-        // {
-        //   new: true
-        // }
     );
-
-    console.log(updated._id);
-
-    // if(updated.modifiedCount == 0) {
-    //   return res.status(304).json({message: "Comment Not Added"});
-    // }
 
     res.redirect(`/accident/${req.query.id}`);
 
