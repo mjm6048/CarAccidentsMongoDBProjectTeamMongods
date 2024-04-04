@@ -9,9 +9,11 @@ const express = require( 'express' ),
 
 router.get('/img/:id', async (req, res) => {
 
-	const file = await fsFiles.findOne({filename: new RegExp(req.params.id, 'i')});
+  try {
 
-    if(file == "null") {
+    const file = await fsFiles.findOne({filename: new RegExp(req.params.id, 'i')});
+
+    if(file == null) {
         return res.status(404).json({message: "Not Found"});
     }
 
@@ -25,6 +27,12 @@ router.get('/img/:id', async (req, res) => {
 
     res.end();
 
+  }catch(error) {
+
+    console.error( error );
+    res.status( 500 ).send( 'Internal Server Error' );
+  }
+
 });
 
 router.get('/:ref', async ( req, res ) => { 
@@ -35,8 +43,6 @@ router.get('/:ref', async ( req, res ) => {
         {_id: new ObjectId(req.params.ref)}
     );
 
-    var image;
-
     // console.log(records);
 
     res.render(`accident`, {accident: record});
@@ -46,6 +52,32 @@ router.get('/:ref', async ( req, res ) => {
     res.status( 500 ).send( 'Internal Server Error' );
   }
     
+});
+
+router.post('/comment', async (req, res) => {
+
+  try {
+
+    const updated = await accidents.findOneAndUpdate(
+        {_id: new ObjectId(req.query.id)},
+        {$push: {Comments: req.body.comment}},
+        // {
+        //   new: true
+        // }
+    );
+
+    console.log(updated._id);
+
+    // if(updated.modifiedCount == 0) {
+    //   return res.status(304).json({message: "Comment Not Added"});
+    // }
+
+    res.redirect(`/accident/${req.query.id}`);
+
+  } catch(error) {
+    console.error( error );
+    res.status( 500 ).send( 'Internal Server Error' );
+  }
 });
 
 module.exports = router;

@@ -19,7 +19,7 @@ const accidentsSchema = new mongoose.Schema(
         Timezone: String,
         Weather_Timestamp: Date,
         Weather_Condition: String,
-        Comments: String
+        Comments: Array
     }
 );
 
