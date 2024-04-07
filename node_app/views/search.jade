@@ -2,19 +2,74 @@ extends layout
 
 block content
     .container
-        form(action="/search?", method="GET")
-            input(type="text", name="fragment", placeholder="search accident descriptions...", value=fragment ? fragment : "")
+        h1 US Accidents 2016 - 2023
+        form(action="/search?", method="GET", id="search")
+            select(name="field", id="field")
+                    - searchTypes = ['description', 'location']
+                    each type in searchTypes
+                        option(value=type) #{type}
+                    option(selected, disabled, hidden) Search by  
+            input(hidden,type="text", name="fragment", placeholder="Type a keyword/fragment...", value=fragment ? fragment : "")
+            input(hidden,type="text", name="lat", placeholder="latitude", value=lat ? lat : "")
+            input(hidden,type="text", name="lng", placeholder="longitude", value=lng ? lng : "")
+            input(hidden,type="number", name="distance", placeholder="distance (meters)", value=distance ? distance : "")
             input(hidden, name="page", value=1)
-            //- button(name="page", value=page)
             button(type="submit") Search
+            script.
+
+                var searchBy = document.getElementById("field");
+                
+                if("#{field}".length != 0){
+                    searchBy.value = "#{field}";
+                    showHideInputs();
+                }
+
+                function showHideInputs() {
+
+                    var formElements = document.getElementById("search").elements;
+                    var omit;
+
+                    //- theres probably a better way to do this, but hey, it works
+                    if(searchBy.value == "description"){
+
+                        omit = ["lat","lng","distance"];
+                    
+                    }else if(searchBy.value == "location") {
+
+                        omit = ["fragment"];
+                    }else {
+                        omit = ["lat","lng","distance","fragment"];
+                    }
+
+                    for(let i = 0; i < formElements.length; i++) {
+                        
+                        if(omit.includes(formElements[i].name)){
+
+                            formElements[i].setAttribute("hidden", true);
+                            
+                        }else if(formElements[i].name != "page"){
+
+                            formElements[i].removeAttribute("hidden")
+                        }
+                    }
+                }
+
+                //- listener for searchBy changes
+                searchBy.addEventListener("change", () => {
+
+                    showHideInputs();
+                });
+
+        if field
+            h3 #{field} search results:
         
-        - if(!isNaN(page) && fragment != "") {
+        - if(!isNaN(page)) {
             - if(page - 1 > 0) {
-                a(href="/search?fragment=" + fragment + "&page=" + (page - 1)) Previous Page
+                a(href=`/search?page=${(page - 1)}&field=${field}&fragment=${fragment}&lat=${lat}&lng=${lng}&distance=${distance}`) Previous Page
                 span  - 
             - }
             - if(searchResults.length == 25) {
-                a(href="/search?fragment=" + fragment + "&page=" + (page + 1)) Next Page
+                a(href=`/search?page=${(page + 1)}&field=${field}&fragment=${fragment}&lat=${lat}&lng=${lng}&distance=${distance}`) Next Page
             - }
         - }
 

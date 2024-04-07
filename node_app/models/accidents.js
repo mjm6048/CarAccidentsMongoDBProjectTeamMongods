@@ -1,6 +1,20 @@
 const { ObjectId, Decimal128 } = require('mongodb');
 const mongoose = require('mongoose');
 
+const pointSchema = new mongoose.Schema(
+    {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            required: true
+        }
+    }
+);
+
 const accidentsSchema = new mongoose.Schema(
     {
         _id: ObjectId,
@@ -19,7 +33,12 @@ const accidentsSchema = new mongoose.Schema(
         Timezone: String,
         Weather_Timestamp: Date,
         Weather_Condition: String,
-        Comments: Array
+        Comments: Array,
+        location: {
+            type: pointSchema,
+            index: '2dsphere',
+            required: true
+        }
     }
 );
 
