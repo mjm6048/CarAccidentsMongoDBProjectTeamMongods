@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -7,7 +8,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var searchRouter = require('./routes/search');
 var apiRouter = require('./routes/api');
-var accidentRouter = require('./routes/accident')
+var accidentRouter = require('./routes/accident');
+var loginRouter = require('./routes/login');
 
 var app = express();
 
@@ -21,6 +23,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Session Initialize
+app.use(session({
+  secret: "ed4beb38b45860afbee133162b4c86fc",
+  saveUninitialized: true,
+  resave: true,
+  cookie: { maxAge: 60000 * 60 * 3 } // 3 hours until expires
+}));
+
 // Database Variables
 const mongoose = require( 'mongoose' ),
       url = `mongodb://127.0.0.1:27017/mongoProject`;
@@ -31,7 +41,7 @@ mongoose.connect(url)
     .catch((err) => console.error('Error connecting to MongoDB:', err));
 
 // Routes
-app.use('/', indexRouter);
+app.use('/', loginRouter);
 app.use('/search', searchRouter);
 app.use('/accident', accidentRouter);
 app.use('/api', apiRouter);

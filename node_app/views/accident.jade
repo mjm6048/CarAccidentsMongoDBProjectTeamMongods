@@ -13,6 +13,9 @@ block content
     div= `Comments:`
         each item in accident.Comments
             p= item
-    form(action="/accident/comment/?id=" + accident._id, method="POST")
-        input(type="text", name="comment", placeholder="add a comment")
-        button(type="submit") Comment
+    if loggedIn
+        form(action="/accident/comment/?id=" + accident._id, method="POST")
+            input(type="text", name="comment", placeholder="add a comment")
+            button(type="submit") Comment
+    else 
+        a(href="/?redirect=/accident/" + accident._id) Login to Comment

@@ -45,7 +45,7 @@ router.get('/:ref', async ( req, res ) => {
 
     // console.log(records);
 
-    res.render(`accident`, {accident: record});
+    res.render(`accident`, {accident: record, loggedIn: req.session.loggedIn});
   }
   catch ( error ) {
     console.error( error );
@@ -57,6 +57,8 @@ router.get('/:ref', async ( req, res ) => {
 router.post('/comment', async (req, res) => {
 
   try {
+
+    if(!req.session.loggedIn) return res.status(401);
 
     const updated = await accidents.findOneAndUpdate(
         {_id: new ObjectId(req.query.id)},

@@ -1,7 +1,10 @@
 extends layout
 
 block content
-  //- h1= title
-  //- p Welcome to #{title}
-  each item in title
-    h1= item.Description
+  h1 Login
+  form(action=`/login${redirect ? "?redirect=" + redirect : ""}`, method="POST")
+    input(type="text", name="user", placeholder="username")
+    input(type="password" name="pass" placeholder="password")
+    button(type="submit") Login
+  if invalid
+    p Invalid Username/Password
