@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    img(src="/accident/img/" + accident.Weather_Condition, alt=`${accident.Weather_Condition}.jpg`, width="200px", height="200px")
+    h3= `Severity: ${accident.Severity}`
+    h3= `Start Time: ${accident.Start_Time}`
+    h3= `End Time: ${accident.End_Time}`
+    h3= `Coordinates: (${accident.Start_Lat}, ${accident.Start_Lng})`
+    h3= `Description: ${accident.Description}`
+    h3= `Location: ${accident.Street}, ${accident.City}, ${accident.County}, ${accident.State}, ${accident.Zipcode}, ${accident.Country}`
+    h3= `Weather Timestamp: ${accident.Weather_Timestamp}`
+    h3= `Weather Condition: ${accident.Weather_Condition}`
+    div= `Comments:`
+        each item in accident.Comments
+            p= item
+    if loggedIn
+        form(action="/accident/comment/?id=" + accident._id, method="POST")
+            input(type="text", name="comment", placeholder="add a comment")
+            button(type="submit") Comment
+    else 
+        a(href="/?redirect=/accident/" + accident._id) Login to Comment
