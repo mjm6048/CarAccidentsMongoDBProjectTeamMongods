@@ -2,11 +2,11 @@ body, html {
   margin: 0;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: burlywood;
+  background-color: #deb88736;
 }
 
 a {
-  color: #00B7FF;
+  color: #C439ED;
 }
 
 .container {
@@ -92,10 +92,10 @@ img#weatherImage {
   margin-bottom: 10px; /* Space between the comment box and the button */
 }
 
-button {
+/* button {
   cursor: pointer;
-  display: block; /* Ensures the button is on its own line below the comment box */
-  width: fit-content; /* Makes the button's width fit its content */
+  display: block; Ensures the button is on its own line below the comment box
+  width: fit-content; Makes the button's width fit its content
   font-size: 25px;
-}
+} */
 
