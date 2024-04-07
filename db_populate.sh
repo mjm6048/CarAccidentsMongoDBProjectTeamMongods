@@ -15,9 +15,9 @@ mongosh 127.0.0.1:27017 --quiet createCommentsArray.js
 mongosh 127.0.0.1:27017 --quiet createGeoMongoIndex.js
 
 # Test file for area search. Change the area/radius as needed to test.
-mongosh 127.0.0.1:27017 --quiet createAreaSearchTest.js
+# mongosh 127.0.0.1:27017 --quiet createAreaSearchTest.js
 
-# add import for images collection from dump
+# import users
 mongoimport --db mongoProject --collection users --type csv --headerline --file Users.csv
 
 #gridfs image import, create bucket
