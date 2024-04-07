@@ -1,6 +1,8 @@
-body {
+body, html {
+  margin: 0;
   padding: 50px;
-  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: burlywood;
 }
 
 a {
@@ -10,3 +12,90 @@ a {
 .container {
   margin: 0 auto;
 }
+
+h2.weather{
+  font-size: 25px;
+
+}
+#backButton{
+  width: 70px;
+  height: 35px;
+}
+.containersearch {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+  text-align: center;
+  font-size: 25px;
+}
+
+h1.title {
+  margin-top: 0;
+  font-size: 40px; /* Adjust size as needed */
+  text-align: center;
+}
+
+#search {
+  width: 750px;
+  height: 40px;
+  font-size: 30px; /* Corrected typo */
+}
+#searchlist{
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+#searchbutton {
+  width: 200px; /* Example width to make the button larger */
+  height: 50px; /* Example height to make the button larger */
+  font-size: 25px;
+  margin-top: 10px; /* Add some space between the search box and the button */
+}
+
+
+.containersearch{
+  font-size: 25px;
+  align-self: center;
+  text-align: center;
+}
+
+/* .container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+} */
+
+.image-section, .details-section {
+  flex: 1;
+  padding: 10px;
+}
+
+img#weatherImage {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin-bottom: 20px;
+}
+#commentBox {
+  width: 350px; /* Width adjusted to 150px */
+  height: 230px; /* Height adjusted to 100px */
+  margin-bottom: 10px; /* Space between the comment box and the button */
+}
+
+button {
+  cursor: pointer;
+  display: block; /* Ensures the button is on its own line below the comment box */
+  width: fit-content; /* Makes the button's width fit its content */
+  font-size: 25px;
+}
+
